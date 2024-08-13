@@ -280,6 +280,7 @@ function button_menu() {
 function release_button_menu() {
     set_button(MENU_BUTTON, false);
 }
+
 /*** AHRS, courtesy of https://github.com/psiphi75/ahrs ***/
 
 //= ====================================================================================================
