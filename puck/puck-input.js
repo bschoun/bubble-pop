@@ -276,7 +276,7 @@ function button_down() {
 function button_menu() {
     set_button(MENU_BUTTON, true);
 }
-
+ 
 function release_button_menu() {
     set_button(MENU_BUTTON, false);
 }
