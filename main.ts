@@ -315,7 +315,7 @@ game.showLongText("Use belly breathing and breath holds to move the hot air ball
 game.showLongText("Hold the Puck on your belly, soft side up.", DialogLayout.Center)
 game.showLongText("Inhale to make the balloon go up, exhale to make it go down.", DialogLayout.Center)
 game.showLongText("Pop as many bubbles as you can!", DialogLayout.Center)
-breathHoldSeconds = game.askForNumber("Breath hold seconds:", 2) + 1
+breathHoldSeconds = game.askForNumber("Breath hold length (s):", 2) + 1
 game.onUpdateInterval(1000, function () {
     createCoin()
 })
