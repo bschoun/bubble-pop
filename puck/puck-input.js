@@ -171,6 +171,7 @@ function onLine(line)
                     // TODO: Trigger something that shows on the screen that shows we're not holding still enough
                     release_button_down();
                     release_button_up();
+                    button_b();
                 }
             }
             // If not, determine state based on data and current state
@@ -180,9 +181,10 @@ function onLine(line)
                     if (state != states.HOLD) {
                         state = states.HOLD;
                         console.log(state);
-                        // TODO: Stop pressing any buttons, stop any UNKNOWN events
+                        // Stop pressing any buttons, stop any UNKNOWN events
                         release_button_down();
                         release_button_up();
+                        release_button_b();
                     }
                 }
 
@@ -197,13 +199,13 @@ function onLine(line)
                             state_count = 0;    // reset the count
                             console.log(state);
                             button_up();
-                            // TODO: Move up
+                            // Move up
                         }
                         else if (avg < (longAvg - stdDev*2.5)) {
                             state = states.EXHALE;
                             state_count = 0;
                             console.log(state);
-                            // TODO: Move down
+                            // Move down
                             button_down();
                         }
                     }
@@ -273,12 +275,12 @@ function button_down() {
     set_button(DOWN_BUTTON, true);
 }
 
-function button_menu() {
-    set_button(MENU_BUTTON, true);
+function button_b() {
+    set_button(B_BUTTON, true);
 }
  
-function release_button_menu() {
-    set_button(MENU_BUTTON, false);
+function release_button_b() {
+    set_button(B_BUTTON, false);
 }
 
 /*** AHRS, courtesy of https://github.com/psiphi75/ahrs ***/
