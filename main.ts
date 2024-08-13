@@ -7,6 +7,13 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     balloon.startEffect(effects.fire)
     balloon.startEffect(effects.fire)
 })
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    pauseBubbles = 1
+    heartCount = 0
+    scene.cameraShake(4, 500)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Projectile, effects.bubbles, 500)
+    music.play(music.createSoundEffect(WaveShape.Noise, 3340, 620, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+})
 function createCoin () {
     if (pauseBubbles == 0) {
         if (heartCount == 0 || heartCount == breathHoldSeconds) {
@@ -62,6 +69,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
     otherSprite.startEffect(effects.bubbles)
     sprites.destroy(otherSprite)
     info.changeScoreBy(1)
+    music.play(music.createSoundEffect(WaveShape.Sine, 200, 600, 255, 0, 150, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
 function placeMountain (leftPosition: number) {
     lastCreatedMountain = sprites.create(mountains[randint(0, 1)], SpriteKind.Mountain)
@@ -75,16 +83,10 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     effects.clearParticles(balloon)
     balloon.setImage(balloonDeflated)
 })
-controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (pauseBubbles == 0) {
-        pauseBubbles = 1
-        heartCount = 0
-        scene.cameraShake(4, 500)
-        sprites.destroyAllSpritesOfKind(SpriteKind.Projectile, effects.bubbles, 500)
-    } else {
-        pauseBubbles = 0
-        effects.bubbles.startScreenEffect(500)
-    }
+controller.B.onEvent(ControllerButtonEvent.Released, function () {
+    pauseBubbles = 0
+    effects.bubbles.startScreenEffect(500)
+    music.play(music.createSoundEffect(WaveShape.Noise, 1066, 3473, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
 let coin: Sprite = null
 let breathHoldSeconds = 0
@@ -165,8 +167,7 @@ let balloonInflated = img`
     .......fffff.......
     `
 heartCount = 0
-pauseBubbles = 1
-music.setVolume(0)
+pauseBubbles = 0
 balloon = sprites.create(balloonDeflated, SpriteKind.Player)
 scene.setBackgroundColor(6)
 balloon.setStayInScreen(true)
