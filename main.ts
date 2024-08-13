@@ -8,52 +8,54 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     balloon.startEffect(effects.fire)
 })
 function createCoin () {
-    if (heartCount == 0 || heartCount == breathHoldSeconds) {
-    	
-    } else if (heartCount < breathHoldSeconds) {
-        coin = sprites.createProjectileFromSide(img`
-            . . . . . b b b b b b . . . . . 
-            . . . b b 9 9 9 9 9 9 b b . . . 
-            . . b b 9 9 9 9 9 9 9 9 b b . . 
-            . b b 9 d 9 9 9 9 9 9 9 9 b b . 
-            . b 9 d 9 9 9 9 9 1 1 1 9 9 b . 
-            b 9 d d 9 9 9 9 9 1 1 1 9 9 9 b 
-            b 9 d 9 9 9 9 9 9 1 1 1 9 9 9 b 
-            b 9 3 9 9 9 9 9 9 9 9 9 1 9 9 b 
-            b 5 3 d 9 9 9 9 9 9 9 9 9 9 9 b 
-            b 5 3 3 9 9 9 9 9 9 9 9 9 d 9 b 
-            b 5 d 3 3 9 9 9 9 9 9 9 d d 9 b 
-            . b 5 3 3 3 d 9 9 9 9 d d 5 b . 
-            . b d 5 3 3 3 3 3 3 3 d 5 b b . 
-            . . b d 5 d 3 3 3 3 5 5 b b . . 
-            . . . b b 5 5 5 5 5 5 b b . . . 
-            . . . . . b b b b b b . . . . . 
-            `, -30, 0)
-        coin.y = 20
-    } else {
-        coin = sprites.createProjectileFromSide(img`
-            . . . . . b b b b b b . . . . . 
-            . . . b b 9 9 9 9 9 9 b b . . . 
-            . . b b 9 9 9 9 9 9 9 9 b b . . 
-            . b b 9 d 9 9 9 9 9 9 9 9 b b . 
-            . b 9 d 9 9 9 9 9 1 1 1 9 9 b . 
-            b 9 d d 9 9 9 9 9 1 1 1 9 9 9 b 
-            b 9 d 9 9 9 9 9 9 1 1 1 9 9 9 b 
-            b 9 3 9 9 9 9 9 9 9 9 9 1 9 9 b 
-            b 5 3 d 9 9 9 9 9 9 9 9 9 9 9 b 
-            b 5 3 3 9 9 9 9 9 9 9 9 9 d 9 b 
-            b 5 d 3 3 9 9 9 9 9 9 9 d d 9 b 
-            . b 5 3 3 3 d 9 9 9 9 d d 5 b . 
-            . b d 5 3 3 3 3 3 3 3 d 5 b b . 
-            . . b d 5 d 3 3 3 3 5 5 b b . . 
-            . . . b b 5 5 5 5 5 5 b b . . . 
-            . . . . . b b b b b b . . . . . 
-            `, -30, 0)
-        coin.y = scene.screenHeight() - 20
-    }
-    heartCount += 1
-    if (heartCount == breathHoldSeconds * 2) {
-        heartCount = 0
+    if (pauseBubbles == 0) {
+        if (heartCount == 0 || heartCount == breathHoldSeconds) {
+        	
+        } else if (heartCount < breathHoldSeconds) {
+            coin = sprites.createProjectileFromSide(img`
+                . . . . . b b b b b b . . . . . 
+                . . . b b 9 9 9 9 9 9 b b . . . 
+                . . b b 9 9 9 9 9 9 9 9 b b . . 
+                . b b 9 d 9 9 9 9 9 9 9 9 b b . 
+                . b 9 d 9 9 9 9 9 1 1 1 9 9 b . 
+                b 9 d d 9 9 9 9 9 1 1 1 9 9 9 b 
+                b 9 d 9 9 9 9 9 9 1 1 1 9 9 9 b 
+                b 9 3 9 9 9 9 9 9 9 9 9 1 9 9 b 
+                b 5 3 d 9 9 9 9 9 9 9 9 9 9 9 b 
+                b 5 3 3 9 9 9 9 9 9 9 9 9 d 9 b 
+                b 5 d 3 3 9 9 9 9 9 9 9 d d 9 b 
+                . b 5 3 3 3 d 9 9 9 9 d d 5 b . 
+                . b d 5 3 3 3 3 3 3 3 d 5 b b . 
+                . . b d 5 d 3 3 3 3 5 5 b b . . 
+                . . . b b 5 5 5 5 5 5 b b . . . 
+                . . . . . b b b b b b . . . . . 
+                `, -30, 0)
+            coin.y = 20 + heartCount % 2 * 4
+        } else {
+            coin = sprites.createProjectileFromSide(img`
+                . . . . . b b b b b b . . . . . 
+                . . . b b 9 9 9 9 9 9 b b . . . 
+                . . b b 9 9 9 9 9 9 9 9 b b . . 
+                . b b 9 d 9 9 9 9 9 9 9 9 b b . 
+                . b 9 d 9 9 9 9 9 1 1 1 9 9 b . 
+                b 9 d d 9 9 9 9 9 1 1 1 9 9 9 b 
+                b 9 d 9 9 9 9 9 9 1 1 1 9 9 9 b 
+                b 9 3 9 9 9 9 9 9 9 9 9 1 9 9 b 
+                b 5 3 d 9 9 9 9 9 9 9 9 9 9 9 b 
+                b 5 3 3 9 9 9 9 9 9 9 9 9 d 9 b 
+                b 5 d 3 3 9 9 9 9 9 9 9 d d 9 b 
+                . b 5 3 3 3 d 9 9 9 9 d d 5 b . 
+                . b d 5 3 3 3 3 3 3 3 d 5 b b . 
+                . . b d 5 d 3 3 3 3 5 5 b b . . 
+                . . . b b 5 5 5 5 5 5 b b . . . 
+                . . . . . b b b b b b . . . . . 
+                `, -30, 0)
+            coin.y = scene.screenHeight() - 20 - heartCount % 2 * 4
+        }
+        heartCount += 1
+        if (heartCount == breathHoldSeconds * 2) {
+            heartCount = 0
+        }
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
@@ -73,11 +75,23 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     effects.clearParticles(balloon)
     balloon.setImage(balloonDeflated)
 })
+controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (pauseBubbles == 0) {
+        pauseBubbles = 1
+        heartCount = 0
+        scene.cameraShake(4, 500)
+        sprites.destroyAllSpritesOfKind(SpriteKind.Projectile, effects.bubbles, 500)
+    } else {
+        pauseBubbles = 0
+        effects.bubbles.startScreenEffect(500)
+    }
+})
 let coin: Sprite = null
 let breathHoldSeconds = 0
 let lastCreatedMountain: Sprite = null
 let mountains: Image[] = []
 let balloon: Sprite = null
+let pauseBubbles = 0
 let heartCount = 0
 let balloonDeflated: Image = null
 balloonDeflated = img`
@@ -151,6 +165,7 @@ let balloonInflated = img`
     .......fffff.......
     `
 heartCount = 0
+pauseBubbles = 1
 music.setVolume(0)
 balloon = sprites.create(balloonDeflated, SpriteKind.Player)
 scene.setBackgroundColor(6)
